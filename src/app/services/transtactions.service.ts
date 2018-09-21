@@ -10,10 +10,10 @@ export class TranstactionsService {
 
   getRates() {
     const options = {
-      withCredentials: true
+      withCredentials: false
     };
 
-    this.httpClient.get('https://quiet-stone-2094.herokuapp.com/rates.json', options).toPromise()
+    this.httpClient.get('https://www.json-generator.com/api/json/get/bVviQgqKiG?indent=2', options).toPromise()
       .then((data: any) => {
         console.log(data);
       })
