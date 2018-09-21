@@ -13,7 +13,7 @@ export class TranstactionsService {
       withCredentials: true
     };
 
-    this.httpClient.get('http://quiet-stone-2094.herokuapp.com/rates.json', options).toPromise()
+    this.httpClient.get('https://quiet-stone-2094.herokuapp.com/rates.json', options).toPromise()
       .then((data: any) => {
         console.log(data);
       })
