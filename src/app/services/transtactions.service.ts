@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 
-import {Product} from '../components/product.component';
+import { Product } from '../components/product.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,20 +42,30 @@ export class TransactionsService {
   }
 
   loadProducts() {
-    this.transactions.forEach(transaction => {
-      const productFound = this.products.find((prod) => {
-        return prod.name === transaction.sku;
-      });
+    if (this.products.length === 0) {
+      this.transactions.forEach(transaction => {
+        const productFound = this.products.find((prod) => {
+          return prod.name === transaction.sku;
+        });
 
-      if (productFound) {
-        productFound.addTransaction({amount: transaction.amount, currency: transaction.currency});
-      } else {
-        const product = new Product(transaction.sku);
-        product.addTransaction({amount: transaction.amount, currency: transaction.currency});
-        this.products.push(product);
-      }
-    });
+        if (productFound) {
+          productFound.addTransaction({amount: transaction.amount, currency: transaction.currency});
+        } else {
+          const product = new Product(transaction.sku);
+          product.addTransaction({amount: transaction.amount, currency: transaction.currency});
+          this.products.push(product);
+        }
+      });
+    }
 
     this.productsChange.next(this.products);
+  }
+
+  getProduct(name) {
+    const productFound = this.products.find((prod) => {
+      return prod.name === name;
+    });
+
+    return productFound;
   }
 }
