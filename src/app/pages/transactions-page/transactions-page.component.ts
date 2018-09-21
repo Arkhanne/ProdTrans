@@ -8,18 +8,23 @@ import { TranstactionsService } from '../../services/transtactions.service';
   styleUrls: ['./transactions-page.component.css']
 })
 export class TransactionsPageComponent implements OnInit {
-  rates = [];
-  transactions = [];
+  // rates = [];
+  // transactions = [];
+  products = [];
 
   constructor(private transactionsSrv: TranstactionsService) { }
 
   ngOnInit() {
-    this.transactionsSrv.ratesChange$.subscribe((rates) => {
-      this.rates = rates;
-    });
+    // this.transactionsSrv.ratesChange$.subscribe((rates) => {
+    //   this.rates = rates;
+    // });
 
-    this.transactionsSrv.transactionsChange$.subscribe((transactions) => {
-      this.transactions = transactions;
+    // this.transactionsSrv.transactionsChange$.subscribe((transactions) => {
+    //   this.transactions = transactions;
+    // });
+
+    this.transactionsSrv.productsChange$.subscribe((products) => {
+      this.products = products;
     });
 
     this.transactionsSrv.getRates();
