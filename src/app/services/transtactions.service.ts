@@ -2,22 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 
+import {Product} from '../components/product.component';
+
 @Injectable({
   providedIn: 'root'
 })
-export class TranstactionsService {
+export class TransactionsService {
   private options = {
     withCredentials: false
   };
   private rates = [];
   private transactions = [];
   private products = [];
-  // private ratesChange: Subject<any> = new Subject();
-  // private transactionsChange: Subject<any> = new Subject();
   private productsChange: Subject<any> = new Subject();
 
-  // ratesChange$: Observable<any> = this.ratesChange.asObservable();
-  // transactionsChange$: Observable<any> = this.transactionsChange.asObservable();
   productsChange$: Observable<any> = this.productsChange.asObservable();
 
   constructor(private httpClient: HttpClient) { }
@@ -26,7 +24,6 @@ export class TranstactionsService {
     this.httpClient.get('https://www.json-generator.com/api/json/get/bVviQgqKiG?indent=2', this.options).toPromise()
       .then((data: any) => {
         this.rates = data;
-        // this.ratesChange.next(this.rates);
       })
       .catch(error => {
         console.log(error);
@@ -37,7 +34,6 @@ export class TranstactionsService {
     this.httpClient.get('https://www.json-generator.com/api/json/get/bTzgmQbyqa?indent=2', this.options).toPromise()
       .then((data: any) => {
         this.transactions = data;
-        // this.transactionsChange.next(this.transactions);
         this.loadProducts();
       })
       .catch(error => {
@@ -47,8 +43,16 @@ export class TranstactionsService {
 
   loadProducts() {
     this.transactions.forEach(transaction => {
-      if (!this.products.includes(transaction.sku)) {
-        this.products.push(transaction.sku);
+      const productFound = this.products.find((prod) => {
+        return prod.name === transaction.sku;
+      });
+
+      if (productFound) {
+        productFound.addTransaction({amount: transaction.amount, currency: transaction.currency});
+      } else {
+        const product = new Product(transaction.sku);
+        product.addTransaction({amount: transaction.amount, currency: transaction.currency});
+        this.products.push(product);
       }
     });
 

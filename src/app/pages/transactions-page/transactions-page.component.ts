@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TranstactionsService } from '../../services/transtactions.service';
+import { TransactionsService } from '../../services/transtactions.service';
 
 @Component({
   selector: 'app-transactions-page',
@@ -12,7 +12,7 @@ export class TransactionsPageComponent implements OnInit {
   // transactions = [];
   products = [];
 
-  constructor(private transactionsSrv: TranstactionsService) { }
+  constructor(private transactionsSrv: TransactionsService) { }
 
   ngOnInit() {
     // this.transactionsSrv.ratesChange$.subscribe((rates) => {
