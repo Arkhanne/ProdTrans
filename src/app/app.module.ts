@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { TransactionsPageComponent } from './pages/transactions-page/transactions-page.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ProductsListComponent } from './components/products-list/products-list.component';
 
 const routes: Routes = [
   { path: '',  component: TransactionsPageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TransactionsPageComponent,
+    ProductsListComponent,
   ],
   imports: [
     BrowserModule,

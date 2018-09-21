@@ -1,5 +1,2 @@
-<ul>
-  <li *ngFor="let product of products">
-    {{ product|json }}
-  </li>
-</ul>
+<app-products-list [products]="products">
+</app-products-list>
