@@ -1,3 +1,5 @@
-<p>
-  transactions-page works!
-</p>
+<ul>
+  <li *ngFor="let transaction of transactions">
+    {{ transaction|json }}
+  </li>
+</ul>
