@@ -22,3 +22,8 @@ table {
   height: 300px;
   overflow: auto;
 }
+
+.noProduct {
+  text-align: center;
+  color: red;
+}
