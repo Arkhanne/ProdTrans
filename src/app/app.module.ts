@@ -18,11 +18,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { E404PageComponent } from './pages/e404-page/e404-page.component';
 
 const routes: Routes = [
   { path: '',  component: TransactionsPageComponent },
   { path: 'product/:id',  component: ProductPageComponent },
-  // { path: '**', component: E404PageComponent }
+  { path: '**', component: E404PageComponent }
   ];
 
 @NgModule({
@@ -32,6 +33,7 @@ const routes: Routes = [
     ProductsListComponent,
     ProductCardComponent,
     ProductPageComponent,
+    E404PageComponent,
   ],
   imports: [
     BrowserModule,
