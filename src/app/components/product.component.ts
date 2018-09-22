@@ -23,8 +23,9 @@ export class Product {
     if (amountFounded) {
       amountFounded.qty++;
       amountFounded.amount += transaction.amount;
+      amountFounded.amount = this.round(amountFounded.amount);
     } else {
-      this.totalAmounts.push({qty: 1, amount: transaction.amount, currency: transaction.currency});
+      this.totalAmounts.push({qty: 1, amount: this.round(transaction.amount), currency: transaction.currency});
     }
   }
 
@@ -37,6 +38,7 @@ export class Product {
     }
 
     this.totalEUR += amount;
+    this.totalEUR = this.round(this.totalEUR);
   }
 
   private amountToEUR(amount, currency, rates) {
@@ -52,5 +54,9 @@ export class Product {
       });
       return this.amountToEUR(amount *= rateFound.rate, rateFound.to, rates);
     }
+  }
+
+  private round(value) {
+    return Math.round(value * 100) / 100;
   }
 }
