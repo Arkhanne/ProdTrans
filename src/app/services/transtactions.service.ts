@@ -20,8 +20,9 @@ export class TransactionsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getRates() {
-    this.httpClient.get('https://www.json-generator.com/api/json/get/bVviQgqKiG?indent=2', this.options).toPromise()
+  private getRates() {
+    if (this.rates.length === 0) {
+      this.httpClient.get('https://www.json-generator.com/api/json/get/bVviQgqKiG?indent=2', this.options).toPromise()
       .then((data: any) => {
         this.rates = data;
         localStorage.removeItem('Rates');
@@ -30,10 +31,12 @@ export class TransactionsService {
       .catch(error => {
         console.log(error);
       });
+    }
   }
 
-  getTransactions() {
-    this.httpClient.get('https://www.json-generator.com/api/json/get/bTzgmQbyqa?indent=2', this.options).toPromise()
+  private getTransactions() {
+    if (this.transactions.length === 0) {
+      this.httpClient.get('https://www.json-generator.com/api/json/get/bTzgmQbyqa?indent=2', this.options).toPromise()
       .then((data: any) => {
         this.transactions = data;
         localStorage.removeItem('Transactions');
@@ -43,9 +46,12 @@ export class TransactionsService {
       .catch(error => {
         console.log(error);
       });
+    } else {
+      this.loadProducts();
+    }
   }
 
-  loadProducts() {
+  private loadProducts() {
     this.products = [];
     this.transactions.forEach(transaction => {
       const productFound = this.products.find((prod) => {
@@ -77,9 +83,14 @@ export class TransactionsService {
     return productFound;
   }
 
-  refresh() {
+  private refresh() {
     this.rates = JSON.parse(localStorage.getItem('Rates'));
     this.transactions = JSON.parse(localStorage.getItem('Transactions'));
     this.products = JSON.parse(localStorage.getItem('Products'));
+  }
+
+  loadData() {
+    this.getRates();
+    this.getTransactions();
   }
 }

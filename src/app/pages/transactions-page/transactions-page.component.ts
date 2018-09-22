@@ -17,8 +17,6 @@ export class TransactionsPageComponent implements OnInit {
       this.products = products;
     });
 
-    this.transactionsSrv.getRates();
-    this.transactionsSrv.getTransactions();
+    this.transactionsSrv.loadData();
   }
-
 }
