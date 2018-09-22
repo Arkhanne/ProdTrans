@@ -1,0 +1,24 @@
+mat-card {
+  background-color: lightblue;
+  margin: 15px auto;
+  max-width: 350px;
+}
+
+mat-expansion-panel {
+  background-color: lightblue;
+  margin: 0 auto;
+  max-width: 350px;
+}
+
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+  background: lightblue;
+}
+
+table {
+  width: 100%;
+}
+
+.container {
+  height: 300px;
+  overflow: auto;
+}

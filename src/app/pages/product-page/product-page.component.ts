@@ -11,6 +11,8 @@ import { Product } from '../../components/product.component';
 })
 export class ProductPageComponent implements OnInit {
   product: Product;
+  amountsColumnsToDisplay = ['currency', 'qty', 'amount'];
+  transactionsColumnsToDisplay = ['currency', 'amount'];
 
   constructor(private transactionsSrv: TransactionsService, private route: ActivatedRoute) { }
 

@@ -1,29 +1,59 @@
-<div *ngIf = "product">
-    <p>
-        Name: {{ product.name }}
-    </p>
-    <p>
-        Transactions: {{ product.totalTransactions }}
-    </p>
-    <p>
-        Total amount in EUR: {{ product.totalEUR }}
-    </p>
-    <p>Transactions by currency</p>
-    <table>
-        <tr>
-            <th>Currency</th>
-            <th>Qty</th>
-            <th>Amount</th>
-        </tr>
-        <tr *ngFor="let amount of product.totalAmounts">
-            <td>{{ amount.currency }}</td>
-            <td>{{ amount.qty }}</td>
-            <td>{{ amount.amount }}</td>
-        </tr>
-    </table>
-    <ul>
-        <li *ngFor="let transaction of product.transactions">
-            {{ transaction|json }}
-        </li>
-    </ul>
+<div *ngIf = "product;else noProduct">
+    <mat-card>
+        <h1>{{ product.name }}</h1>
+        <h3>{{ product.totalTransactions }} transactions</h3>
+        <h3>TOTAL AMOUNT: {{ product.totalEUR }}€</h3>
+    </mat-card>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Transactions by Currency
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <table mat-table [dataSource]="product.totalAmounts">
+                <ng-container matColumnDef="currency">
+                    <th mat-header-cell *matHeaderCellDef> Currency </th>
+                    <td mat-cell *matCellDef="let amount"> {{amount.currency}} </td>
+                </ng-container>
+                <ng-container matColumnDef="qty">
+                    <th mat-header-cell *matHeaderCellDef> Qty </th>
+                    <td mat-cell *matCellDef="let amount"> {{amount.qty}} </td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef> Amount </th>
+                    <td mat-cell *matCellDef="let amount"> {{amount.amount}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="amountsColumnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let amount; columns: amountsColumnsToDisplay"></tr>
+            </table>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        List of Transactions
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="container" >
+                    <table mat-table [dataSource]="product.transactions">
+                        <ng-container matColumnDef="currency">
+                            <th mat-header-cell *matHeaderCellDef> Currency </th>
+                            <td mat-cell *matCellDef="let transaction"> {{transaction.currency}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="amount">
+                            <th mat-header-cell *matHeaderCellDef> Amount </th>
+                            <td mat-cell *matCellDef="let transaction"> {{transaction.amount}} </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="transactionsColumnsToDisplay; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let transaction; columns: transactionsColumnsToDisplay"></tr>
+                    </table>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
 </div>
+<ng-template #noProduct>
+    <p>
+        Non-existent Product
+    </p>
+</ng-template>
