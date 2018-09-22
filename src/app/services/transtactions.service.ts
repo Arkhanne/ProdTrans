@@ -24,6 +24,7 @@ export class TransactionsService {
     this.httpClient.get('https://www.json-generator.com/api/json/get/bVviQgqKiG?indent=2', this.options).toPromise()
       .then((data: any) => {
         this.rates = data;
+        console.log(data);
       })
       .catch(error => {
         console.log(error);
@@ -49,10 +50,10 @@ export class TransactionsService {
         });
 
         if (productFound) {
-          productFound.addTransaction({amount: transaction.amount, currency: transaction.currency});
+          productFound.addTransaction({amount: transaction.amount, currency: transaction.currency}, this.rates);
         } else {
           const product = new Product(transaction.sku);
-          product.addTransaction({amount: transaction.amount, currency: transaction.currency});
+          product.addTransaction({amount: transaction.amount, currency: transaction.currency}, this.rates);
           this.products.push(product);
         }
       });

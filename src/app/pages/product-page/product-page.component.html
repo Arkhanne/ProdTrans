@@ -1,4 +1,29 @@
 <div *ngIf = "product">
-    {{ product.name }}
-    {{ product.transactions }}    
+    <p>
+        Name: {{ product.name }}
+    </p>
+    <p>
+        Transactions: {{ product.totalTransactions }}
+    </p>
+    <p>
+        Total amount in EUR: {{ product.totalEUR }}
+    </p>
+    <p>Transactions by currency</p>
+    <table>
+        <tr>
+            <th>Currency</th>
+            <th>Qty</th>
+            <th>Amount</th>
+        </tr>
+        <tr *ngFor="let amount of product.totalAmounts">
+            <td>{{ amount.currency }}</td>
+            <td>{{ amount.qty }}</td>
+            <td>{{ amount.amount }}</td>
+        </tr>
+    </table>
+    <ul>
+        <li *ngFor="let transaction of product.transactions">
+            {{ transaction|json }}
+        </li>
+    </ul>
 </div>

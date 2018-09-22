@@ -30,7 +30,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-
   ],
   providers: [],
   bootstrap: [AppComponent]
