@@ -24,7 +24,6 @@ export class TransactionsService {
     this.httpClient.get('https://www.json-generator.com/api/json/get/bVviQgqKiG?indent=2', this.options).toPromise()
       .then((data: any) => {
         this.rates = data;
-        console.log(data);
       })
       .catch(error => {
         console.log(error);
