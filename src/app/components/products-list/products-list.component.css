@@ -1,0 +1,9 @@
+mat-grid-list {
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 540px) {
+  mat-grid-list {
+    max-width: 500px;
+  }
+}

@@ -1,5 +1,5 @@
-<ul>
-  <li *ngFor="let product of products">
+<mat-grid-list cols="4" rowHeight="4:3">
+  <mat-grid-tile *ngFor="let product of products">
       <app-product-card [product]="product"></app-product-card>
-  </li>
-</ul>
+  </mat-grid-tile>
+</mat-grid-list>
