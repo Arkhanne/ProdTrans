@@ -11,6 +11,8 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 const routes: Routes = [
   { path: '',  component: TransactionsPageComponent },
   { path: 'product/:id',  component: ProductPageComponent },
@@ -30,6 +32,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
